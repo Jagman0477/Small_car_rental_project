@@ -23,31 +23,31 @@
 <%if(cars === null || cars.length == 0){%>
     <h1 style="text-align: center;" class="mt-4">Opps no cars for you :(</h1>
     <% } else {%> 
-        <% cars.forEach(car => { %>
+        <% for(let i=0; i<cars.length; i++) {%>
             <div class="p-4 bd-highlight d-flex border">
 
                 <div class=" d-flex flex-fill flex-column bd-highlight mb-3" style="padding-top: 2rem;">
 
                     <div class="mb-2 d-flex justify-content-between data">
-                        <div><label for="" class="data">Vehical Model <span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= car.vehical_model %></label></div>
+                        <div><label for="" class="data">Vehical Model <span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= cars[i].vehical_model %></label></div>
                     </div>
 
                     <div class="mb-2 d-flex justify-content-between data">
-                        <div><label for="" class="data">Vehical Number<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= car.vehical_number %></label></div>
+                        <div><label for="" class="data">Vehical Number<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= cars[i].vehical_number %></label></div>
                     </div>
 
                     <div class="mb-2 d-flex justify-content-between data">
-                        <div><label for="" class="data">Seating Capacity<span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= car.seating_capacity %></label></div>
+                        <div><label for="" class="data">Seating Capacity<span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= cars[i].seating_capacity %></label></div>
                     </div>
 
                     <div class="mb-2 d-flex justify-content-between data">
-                        <div><label for="" class="data">Rent per Day<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= car.rent_per_day %></label></div>
+                        <div><label for="" class="data">Rent per Day<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= cars[i].rent_per_day %></label></div>
                     </div>
 
                     <% if (viewFlag) { %>
 
                     <div class="mb-2 d-flex justify-content-between data">
-                        <div><label for="" class="data">Rented By <span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= userName.full_name %></label></div>
+                        <div><label for="" class="data">Rented By <span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= renters[i] %></label></div>
                     </div>
 
                     <% } %>
@@ -66,20 +66,20 @@
                                     <% } %>
                                 </select>
                             
-                                <input type="hidden" name="vehicalNumber" value="<%= car.vehical_number %>">
+                                <input type="hidden" name="vehicalNumber" value="<%= cars[i].vehical_number %>">
                                 <button style="background-color: #de802f;width: 50%;" type="submit" class="font btn btn-primary btn-block mb-4">Rent Car</button>
                     
                             </div>
                         </form>
                     </div>
 
-                <% } else if(userName !== null && car.added_by === userName.userID) { %>
+                <% } else if(userName !== null && cars[i].added_by === userName.userID) { %>
                     
                     <div style="height: 100%;" class="d-flex justify-content-center align-items-center flex-column flex-fill">
                         <form method="POST" action="/editCar" style="width: 100%; height: 100%;" class="">
                             <div class="d-flex justify-content-center align-items-center flex-column flex-fill" style="height: 100%; width: 100%;">
                                 
-                                <input type="hidden" name="vehicalNumber" value="<%= car.vehical_number %>">
+                                <input type="hidden" name="vehicalNumber" value="<%= cars[i].vehical_number %>">
                                 <button style="background-color: #de802f; width: 50%;" type="submit" class="font btn btn-primary btn-block mb-4">Edit Vehical</button>
                             
                             </div>  
@@ -89,7 +89,7 @@
                     
             </div>
 
-        <% }) %>
+        <% } %>
     <% } %>
 </div>
 </div>    

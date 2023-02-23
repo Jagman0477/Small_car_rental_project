@@ -79,4 +79,9 @@ const rentCar = async (userID, vehicalNumber, rentedOn) => {
     else return false
 }
 
-module.exports = {register, getUser, login, logout, addCar, getCar, getAvailableCars, rentCar, editCar, viewableCars, ses}
+const getUserByID = async(userID) => {
+    const result = await pool.query('SELECT * from users where userID = ?;', [userID])
+    return result[0][0]
+}
+
+module.exports = {register, getUser, login, logout, addCar, getCar, getAvailableCars, rentCar, editCar, viewableCars, getUserByID, ses}

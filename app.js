@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const {register, getUser, login, addCar, getCar, getAvailableCars, logout, rentCar, editCar, viewableCars, ses} = require("./database");
+const {register, getUser, login, addCar, getCar, getAvailableCars, logout, rentCar, editCar, viewableCars, getUserByID, ses} = require("./database");
 const session = require("express-session");
 const methodOverride = require("method-override");
 var path = require('path');
@@ -114,14 +114,14 @@ app.route('/afterRegister')
 
     app.route(["/cars", "/"])
         .get( async (req, res) => {
-            let type = null, user = null 
+            let type = null, user = null
             if(req.session.isAuth){
                 let userName = await getUser(req.session.user)
                 type = userName.type 
                 user = userName
             }
             let cars = await getAvailableCars(0)
-            res.render("cars", {cars: cars, type: type, userName: user, viewFlag: false})
+            res.render("cars", {cars: cars, type: type, userName: user, viewFlag: false, renters: null})
         })
 
     app.route("/logout")
@@ -178,10 +178,18 @@ app.route('/afterRegister')
 
     app.route("/viewBookedCars")
         .get( isAuth, async(req, res) => {
+            let renters = []
             let user = await getUser(req.session.user)
             if(user.type === "a"){
                 let cars = await viewableCars(user.userID)
-                res.render('cars', {cars: cars, type: (await getUser(req.session.user)).type, userName: user, viewFlag: true})
+                if(cars){
+                    for(let i=0; i<cars.length;i++){
+                        let temp = (await getUserByID(cars[i].added_by)).full_name
+                        renters.push( temp )
+                        console.log(renters);
+                    }
+                }
+                res.render('cars', {cars: cars, type: (await getUser(req.session.user)).type, userName: user, viewFlag: true, renters: renters})
             } else return res.render('errorPage', {msg: "Not authorized for this.(Only availabe for agency users)", display: true})
         })
 
