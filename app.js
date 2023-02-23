@@ -112,7 +112,7 @@ app.route('/afterRegister')
         else return res.render('errorPage', {msg: "Your account is not authorized for this.", display: true})
     })
 
-    app.route("/cars")
+    app.route(["/cars", "/"])
         .get( async (req, res) => {
             let type = null, user = null 
             if(req.session.isAuth){
