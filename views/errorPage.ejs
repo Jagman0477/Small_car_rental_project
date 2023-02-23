@@ -1,0 +1,35 @@
+<%- include("partials/header1"); -%>
+
+    <title></title>
+
+<%- include("partials/header2"); -%>
+
+<style>
+    .bgImage{
+        background-image: linear-gradient(rgba(82, 82, 82, 0.299),rgba(82, 82, 82, 0.299)), url("/background.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
+
+</head>
+<body class="bgImage">
+    
+    <% if (display === true) { %>
+        <%- include("partials/navbar"); -%>
+    <% } %>
+
+    <div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+        <div class="d-flex flex-column bd-highlight mb-0 mt-2 my-custom-scrollbar scrollbar-warning" style="width: 75%; height: 90%; background-color: white; border: solid 1px #de802f; border-radius: 1%;">
+            <!-- <% if(msg) %> -->
+            <h1 style="text-align: center;" class="mt-4">
+                <% if(typeof msg === "number") { %>
+                    Congrats on booking the Car!! <br> Your rent is = ₹
+                <% } %>
+                <%= msg %> </h1>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<%- include("partials/header1"); -%>
+
+<title>Vehicals</title>
+
+<%- include("partials/header2"); -%>
+
+<style>
+    .bgImage{
+        background-image: linear-gradient(rgba(82, 82, 82, 0.299),rgba(82, 82, 82, 0.299)), url("/background.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
+
+</head>
+<body class="bgImage">
+
+    <%- include("partials/navbar"); -%>
+
+<div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+<div class="d-flex flex-column bd-highlight mb-0 mt-2 my-custom-scrollbar scrollbar-warning" style="width: 75%; height: 90%; background-color: white; border: solid 1px #de802f; border-radius: 1%;">
+<%if(cars === null || cars.length == 0){%>
+    <h1 style="text-align: center;" class="mt-4">Opps no cars for you :(</h1>
+    <% } else {%> 
+        <% cars.forEach(car => { %>
+            <div class="p-4 bd-highlight d-flex border">
+
+                <div class=" d-flex flex-fill flex-column bd-highlight mb-3" style="padding-top: 2rem;">
+
+                    <div class="mb-2 d-flex justify-content-between data">
+                        <div><label for="" class="data">Vehical Model <span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= car.vehical_model %></label></div>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-between data">
+                        <div><label for="" class="data">Vehical Number<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= car.vehical_number %></label></div>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-between data">
+                        <div><label for="" class="data">Seating Capacity<span class="orangeSpan">:</span> </div> <div class="randoDiv1"><%= car.seating_capacity %></label></div>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-between data">
+                        <div><label for="" class="data">Rent per Day<span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= car.rent_per_day %></label></div>
+                    </div>
+
+                    <% if (viewFlag) { %>
+
+                    <div class="mb-2 d-flex justify-content-between data">
+                        <div><label for="" class="data">Rented By <span class="orangeSpan">:</span></div> <div class="randoDiv1"><%= userName.full_name %></label></div>
+                    </div>
+
+                    <% } %>
+
+                </div>
+
+                <% if (type === "c") { %>
+                    <div style="height: 100%;" class="d-flex justify-content-center align-items-center flex-column flex-fill">
+                        <form action="/rentCar" method="post" style="width: 100%; height: 100%;" class="">
+                            <div class="d-flex justify-content-center align-items-center flex-column flex-fill" style="height: 100%; width: 100%;">
+
+                                <select name="daysToRent" class="selectpicker mb-3 rentSelector" >
+                                    <option selected>No. of days to rent:</option>
+                                    <% for( let index = 1; index < 11; index++ ) { %>
+                                        <option value=<%= index %>> <%= index %> </option>
+                                    <% } %>
+                                </select>
+                            
+                                <input type="hidden" name="vehicalNumber" value="<%= car.vehical_number %>">
+                                <button style="background-color: #de802f;width: 50%;" type="submit" class="font btn btn-primary btn-block mb-4">Rent Car</button>
+                    
+                            </div>
+                        </form>
+                    </div>
+
+                <% } else if(userName !== null && car.added_by === userName.userID) { %>
+                    
+                    <div style="height: 100%;" class="d-flex justify-content-center align-items-center flex-column flex-fill">
+                        <form method="POST" action="/editCar" style="width: 100%; height: 100%;" class="">
+                            <div class="d-flex justify-content-center align-items-center flex-column flex-fill" style="height: 100%; width: 100%;">
+                                
+                                <input type="hidden" name="vehicalNumber" value="<%= car.vehical_number %>">
+                                <button style="background-color: #de802f; width: 50%;" type="submit" class="font btn btn-primary btn-block mb-4">Edit Vehical</button>
+                            
+                            </div>  
+                        </form>
+                    </div>
+                    <% } %>
+                    
+            </div>
+
+        <% }) %>
+    <% } %>
+</div>
+</div>    
+
+</body>
+
+</html>

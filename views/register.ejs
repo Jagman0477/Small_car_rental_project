@@ -1,0 +1,48 @@
+<%- include("partials/header1"); -%>
+
+<title>Register</title>
+
+<%- include("partials/header2"); -%>
+
+<style>
+    .bgImage{
+        background-image: linear-gradient(rgba(82, 82, 82, 0.299),rgba(82, 82, 82, 0.299)), url("/background.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
+
+</head>
+<body class="bgImage">
+
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="d-flex justify-content-center align-items-center" style="width: 25%; height: 55%; background-color: white; border: solid 1px #de802f; border-radius: 5%;">
+        <form action="/afterRegister" method="post">
+            <div class="form-outline mb-4">
+                <input class="border rounded border-dark" type="email" name="email" id="email" placeholder="email@xyz.com">
+            </div>
+            
+            <div class="form-outline mb-4">
+                <input class="border rounded border-dark" type="text" name="fullName" id="name" placeholder="Full Name">
+            </div>
+            
+            <div class="form-outline mb-4">
+                <input class="border rounded border-dark" type="text" name="userName" id="username" placeholder="User Name">
+            </div>
+
+            <input type="hidden" name="type" value=<%= type %>>
+
+            <div class="form-outline mb-4">
+                <input class="border rounded border-dark" type="password" name="pass" id="password" placeholder="Password">
+            </div>
+            <button style="background-color: #de802f;" type="submit" class="btn btn-primary btn-block mb-4">Register</button>
+            <div class="text-center" style="margin-top: 5%;">
+                <p>Already registered? <a href="/login" style="color: #de802f;">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

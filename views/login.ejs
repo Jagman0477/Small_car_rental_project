@@ -1,0 +1,39 @@
+<%- include("partials/header1"); -%>
+
+<title>Login</title>
+
+<%- include("partials/header2"); -%>
+<style>
+    .bgImage{
+        background-image: linear-gradient(rgba(82, 82, 82, 0.299),rgba(82, 82, 82, 0.299)), url("/background.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
+</head>
+
+<body class="bgImage">
+
+        <div class="container d-flex align-items-center justify-content-center">
+        <div class="d-flex justify-content-center align-items-center h-50" style="width: 25%; background-color: white; border: solid 1px #de802f; border-radius: 5%;">
+        <form action="/login" method="post">
+        <div class="form-outline mb-4">
+            <input class="border rounded border-dark" type="text" name="userName" id="username" placeholder="User Name">
+        </div>
+        
+        <div class="form-outline mb-4">
+            <input class="border rounded border-dark" type="text" name="password" id="password" placeholder="Password">
+        </div>
+        
+        <button style="background-color: #de802f;" type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+        <div class="text-center">
+            <p>Not a member? <a href="/register" style="color: #de802f;">Register</a></p>
+        </div>
+        
+</form>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<%- include("partials/header1"); -%>
+
+<title>Register</title>
+
+<%- include("partials/header2"); -%>
+
+<style>
+    .bgImage{
+        background-image: linear-gradient(rgba(82, 82, 82, 0.299),rgba(82, 82, 82, 0.299)), url("/background.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
+
+</head>
+<body class="bgImage">
+
+    <%- include("partials/navbar"); -%>
+
+<%if(!success){%>
+    <script>alert("Car with same vehical number already exists.")</script>
+<% } %>
+<% if(vehical === null){ %> 
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="d-flex justify-content-center align-items-center h-75" style="width: 50%; background-color: white; border: solid 1px #de802f; border-radius: 5%;">
+            <form action="/addCar" method="post" style="width: 55%;">
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Vehical Model:</label>
+                    <input class="border rounded border-dark" type="text" name="vehicalModel" id="Vmodel" placeholder="Vehical Model">
+                </div>
+                
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Vehical Number:</label>
+                    <input class="border rounded border-dark" type="text" name="vehicalNumber" id="Vnumber" placeholder="Vehical Number">
+                </div>
+                
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Seating Capacity:</label>
+                    <input class="border rounded border-dark" type="number" name="seatingCapacity" id="Vcapacity" placeholder="Seating Capacity">
+                </div>
+
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Rent Per Day:</label>
+                    <input class="border rounded border-dark" type="number" name="rentPDay" id="Vrent" placeholder="Rent per Day">
+                </div>
+                <button style="background-color: #de802f;" type="submit" class="btn btn-primary btn-block mb-4">Add Car</button>
+                <div class="text-center" style="margin-top: 5%;">
+                    <p>Wanna see all cars?  <a href="#!" style="color: #de802f;">View Vehicals</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+<% } else if(vehical){ %>
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="d-flex justify-content-center align-items-center h-75" style="width: 50%; background-color: white; border: solid 1px #de802f; border-radius: 5%;">
+            <form action="/editCarProxy?_method=PATCH" method="POST" style="width: 55%;">
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Vehical Model:</label>
+                    <input class="border rounded border-dark" type="text" name="vehicalModel" id="Vmodel" placeholder=<%= vehical.vehical_model %>>
+                </div>
+                
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Vehical Number:</label>
+                    <input class="border rounded border-dark" type="text" name="vehicalNumber" id="Vnumber" placeholder=<%= vehical.vehical_number %>>
+                </div>
+                
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Seating Capacity:</label>
+                    <input class="border rounded border-dark" type="number" name="seatingCapacity" id="Vcapacity" placeholder=<%= vehical.seating_capacity %>>
+                </div>
+
+                <div class="form-outline mb-4 d-flex justify-content-between">
+                    <label for="vehical_model">Rent Per Day:</label>
+                    <input class="border rounded border-dark" type="number" name="rentPDay" id="Vrent" placeholder="<%= vehical.rent_per_day %>">
+                </div>
+                <button style="background-color: #de802f;" type="submit" class="btn btn-primary btn-block mb-4">Edit Car</button>
+                <div class="text-center" style="margin-top: 5%;">
+                    <p>Wanna see all cars?  <a href="#!" style="color: #de802f;">View Vehicals</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <% } %>
+
+</body>
+
+</html>
